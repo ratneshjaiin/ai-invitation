@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI Project</title>
+        <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/unicons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="/dark-theme.css" rel="stylesheet" id="theme-link">
+    <style>
+
+
+/* Please ❤ this if you like it! */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+*,*::before,*::after {box-sizing:border-box;}
+body{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 1.4;
+	color: #fff;
+	overflow-x: hidden;
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 4%;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 300px;
+}
+.sec-center {
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+  z-index: 200;
+}
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked){
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+.dark-light:checked + label,
+.dark-light:not(:checked) + label{
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  z-index: 20000;
+  display: block;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  transition: all 200ms linear;
+  box-shadow: 0 0 25px rgba(255,235,167,.45);
+}
+.dark-light:checked + label{
+  transform: rotate(360deg);
+}
+.dark-light:checked + label:after,
+.dark-light:not(:checked) + label:after{
+  position: absolute;
+  content: '';
+  top: 1px;
+  left: 1px;
+  overflow: hidden;
+  z-index: 2;
+  display: block;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background-color: #102770;
+  background-image:url('https://assets.codepen.io/1462889/moon.svg');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 200ms linear;
+  opacity: 0;
+}
+.dark-light:checked + label:after {
+  opacity: 1;
+}
+.dark-light:checked + label:before,
+.dark-light:not(:checked) + label:before{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 1;
+  display: block;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  background-color: #48dbfb;
+  background-image: url('https://assets.codepen.io/1462889/sun.svg');
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 200ms linear;
+}
+.dark-light:checked + label:before{
+  background-color: #000;
+}
+.light-back{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+  overflow: hidden;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 4%;
+  height: 100%;
+  width: 100%;
+  transition: all 200ms linear;
+  opacity: 0;
+}
+.dark-light:checked ~ .light-back{
+  opacity: 1;
+}
+a {
+  position: relative;
+  color: #fff;
+  transition: all 200ms linear;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 2px;
+  padding: 5px 0;
+  padding-left: 20px;
+  padding-right: 15px;
+  margin: 2px 0;
+  text-align: left;
+  text-decoration: none;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: space-between;
+  -ms-flex-pack: distribute;
+}
+a:hover {
+  color: #102770;
+  background-color: #ffeba7;
+}
+a .uil {
+  font-size: 22px;
+}
+.logo {
+	position: fixed;
+	top: 50px;
+	left: 40px;
+	display: block;
+	z-index: 11000000;
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+	transition: all 250ms linear;
+}
+.logo:hover {
+  background-color: transparent;
+}
+.logo img {
+	height: 26px;
+	width: auto;
+	display: block;
+  transition: all 200ms linear;
+}
+.dark-light:checked ~ .logo img{
+  filter: brightness(10%);
+}
+@media screen and (max-width: 991px) {
+.logo {top: 30px;left: 20px;}
+.dark-light:checked + label,.dark-light:not(:checked) + label{
+  top: 20px;
+  right: 20px;
+}}
+ /* @property --gradient-angle { 
+  syntax: "<angle>";
+  initial-value: 90deg;
+  inherits: false;
+}*/
+:root{   
+    --primary: #000000;
+    --secondary: #7f53ac;
+    --background: #f8f9fa;
+    --text: #2d3436;
+    --error: #ff7675;
+    --success: #55efc4;
+    /* border-animation */
+    --bg-background: #111827;
+    --clr-card: #1f2937;
+    --clr-1: #6420aa;
+    --clr-2: #ff3ea5;
+    --clr-3: #ff7ed4;
+        }
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* background: var(--background);s */
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 1000px;
+            height:auto;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem;
+            border-radius: 15px;
+            background-color: var(--clr-card);
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+            z-index: 99;
+        }
+        /* border */
+        .container::after,
+        .container::before {
+        content: " ";
+        position: absolute;
+        z-index: -1;
+        inset: -0.5rem;
+        background: conic-gradient(
+            from var(--gradient-angle),
+            var(--clr-card),
+            var(--clr-1),
+            var(--clr-2),
+            var(--clr-3),
+            var(--clr-2),
+            var(--clr-1),
+            var(--clr-card)
+        );
+        border-radius: inherit;
+        animation: rotate 2.5s linear infinite;
+        }
+
+        .container::after {
+        filter: blur(3rem);
+        }
+
+        @keyframes rotate {
+        0% {
+            --gradient-angle: 0deg;
+        }
+        100% {
+            --gradient-angle: 360deg;
+        }
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background: #eee;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        .form-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .form-section.active {
+            display: block;
+        }
+        .section-title {
+            color: var(--primary);
+            margin: 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .input-feild {
+            flex: 1 0 5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1 rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .buttons {
+            display: flex ;
+            justify-content: space-between ;
+            margin-top: 2rem ;
+        }
+
+        button {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .btn-submit {
+            background: var(--success);
+            color: white;
+        }
+    
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        @media (max-width: 600px) {
+            body{padding: 1rem;}
+            .container {padding: 1rem;}
+            .checkbox-group {grid-template-columns: 1fr;}}
+
+       /* dropdown */
+       .select-menu {
+            width: 300px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .select-menu > .select {
+            border: 2px solid #281e4d;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 12px;
+            transition: all 350ms ease-in-out;
+        }
+
+        .select-menu > .select:hover {
+            border-color: #b154f0;
+            color: #fff;
+        }
+
+        .select-menu > .select.active {
+            border-color: #b154f0;
+            color: #fff;
+        }
+
+        .select-menu > .options-list {
+            background-color: #1f2029;
+            overflow-x: hidden;
+            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+            background-position: center;
+            background-repeat: repeat;
+            background-size: 4%;
+
+            /* position: absolute; */
+            width: 100%;
+            border: 2px solid #281e4d;
+            border-radius: 12px;
+            padding: 10px;
+            margin-top: 10px;
+            max-height: 180px;
+            overflow-y: auto;
+            transition: 0.4s linear 0.2s;
+            display: none;
+        }
+
+        .select-menu > .options-list.active {
+            display: block;
+        }
+
+        .select-menu > .options-list > .option {
+            padding: 10px 0;
+            border-bottom: 2px solid #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 350ms ease-in-out;
+            color: #ffffff;
+        }
+
+        .select-menu > .options-list > .option:hover,
+        .select-menu > .options-list > .option.selected {
+            color: #ffa700;
+            border-bottom: 2px solid #ffa700;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .select-menu > .options-list::-webkit-scrollbar {
+            background-color: #281e4d;
+            width: 4px;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .select-menu > .options-list::-webkit-scrollbar-thumb {
+            background-color: #b154f0;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        /* Container for category dropdown */
+        /* .select-menu { position: relative;  width: 200px;} */
+
+/* spinner-start */
+.spinner:before {transform: rotateX(60deg) rotateY(45deg) rotateZ(45deg); animation: 750ms rotateBefore infinite linear reverse;}
+.spinner:after { transform: rotateX(240deg) rotateY(45deg) rotateZ(45deg);animation: 750ms rotateAfter infinite linear;}
+.spinner:before, .spinner:after {
+	 box-sizing: border-box; content: '';display: block; position: fixed;top: 50%; left: 50%; margin-top: -5em; margin-left: -5em; width: 10em; height: 10em; transform-style: preserve-3d; transform-origin: 50%;transform: rotateY(50%);perspective-origin: 50% 50%; perspective: 340px;background-size: 10em 10em;
+	 background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjI2NnB4IiBoZWlnaHQ9IjI5N3B4IiB2aWV3Qm94PSIwIDAgMjY2IDI5NyIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWxuczpza2V0Y2g9Imh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaC9ucyI+CiAgICA8dGl0bGU+c3Bpbm5lcjwvdGl0bGU+CiAgICA8ZGVzY3JpcHRpb24+Q3JlYXRlZCB3aXRoIFNrZXRjaCAoaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoKTwvZGVzY3JpcHRpb24+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBza2V0Y2g6dHlwZT0iTVNQYWdlIj4KICAgICAgICA8cGF0aCBkPSJNMTcxLjUwNzgxMywzLjI1MDAwMDM4IEMyMjYuMjA4MTgzLDEyLjg1NzcxMTEgMjk3LjExMjcyMiw3MS40OTEyODIzIDI1MC44OTU1OTksMTA4LjQxMDE1NSBDMjE2LjU4MjAyNCwxMzUuODIwMzEgMTg2LjUyODQwNSw5Ny4wNjI0OTY0IDE1Ni44MDA3NzQsODUuNzczNDM0NiBDMTI3LjA3MzE0Myw3NC40ODQzNzIxIDc2Ljg4ODQ2MzIsODQuMjE2MTQ2MiA2MC4xMjg5MDY1LDEwOC40MTAxNTMgQy0xNS45ODA0Njg1LDIxOC4yODEyNDcgMTQ1LjI3NzM0NCwyOTYuNjY3OTY4IDE0NS4yNzczNDQsMjk2LjY2Nzk2OCBDMTQ1LjI3NzM0NCwyOTYuNjY3OTY4IC0yNS40NDkyMTg3LDI1Ny4yNDIxOTggMy4zOTg0Mzc1LDEwOC40MTAxNTUgQzE2LjMwNzA2NjEsNDEuODExNDE3NCA4NC43Mjc1ODI5LC0xMS45OTIyOTg1IDE3MS41MDc4MTMsMy4yNTAwMDAzOCBaIiBpZD0iUGF0aC0xIiBmaWxsPSIjMDAwMDAwIiBza2V0Y2g6dHlwZT0iTVNTaGFwZUdyb3VwIj48L3BhdGg+CiAgICA8L2c+Cjwvc3ZnPg==);
+}
+@keyframes rotateBefore {from {transform: rotateX(60deg) rotateY(45deg) rotateZ(0deg); } to { transform: rotateX(60deg) rotateY(45deg) rotateZ(-360deg);}}
+@keyframes rotateAfter { from {transform: rotateX(240deg) rotateY(45deg) rotateZ(0deg);} to {transform: rotateX(240deg) rotateY(45deg) rotateZ(360deg);}}
+/*spinner-end*/
+/*iframe*/
+iframe {width: 1340px;max-width: 100%; border-radius: 16px;overflow: hidden;}
+/* Hide scrollbar for IE, Edge and Firefox */
+</style>
+</head>
+<body>
+    <input class="dark-light" type="checkbox" id="dark-light" name="dark-light"/>
+    <label for="dark-light"></label>
+    <div class="light-back"></div> 
+    <a href="#" class="logo" target="_blank">
+       AI VIDEO
+        <!-- <img src="https://assets.codepen.io/1462889/fcy.png" alt=""> -->
+    </a>
+    <div class="container main">
+        <h1>Create Instant Video</h1>
+        <button class="btn-toggle">Toggle Dark-Mode</button>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <form id="cardiologyForm">
+            <!-- Personal Information -->
+            <div class="form-section active" data-section="1">
+                <h2 class="section-title">Choose Category</h2>
+                <div class="select-menu active">
+                    <div class="select" id="categorySelect">
+                        <span>Select Category</span>
+                        <i class="uil uil-arrow-down"></i>
+                    </div>
+                    <div class="options-list" id="categoryOptions">
+                        <!-- Categories will be populated here dynamically -->
+                    </div>
+                </div>
+            </div>
+            <!-- Insurance Details -->
+            <div class="form-section" data-section="2">
+                <h2 class="section-title">Choose Sub-Category</h2>
+                <div class="select-menu">
+                    <div class="select" id="subCategorySelect">
+                        <span>Select Sub-Category</span>
+                        <i class="uil uil-arrow-down"></i>
+                    </div>
+                    <div class="options-list" id="subCategoryOptions">
+                        <!-- Sub-Categories will be populated here dynamically -->
+                    </div>
+                </div>
+            </div>
+            <!-- Other sections of the form (Medical History, Symptoms, etc.) go here -->
+            <div class="form-section" data-section="3">
+                <h2 class="section-title">Other Field</h2>
+                <div class="form-group row">
+                    <!-- Language Selection -->
+                    <div class="col-12 col-sm-6 col-sm-3">
+                        <label for="language">Choose Language</label>
+                        <select id="language" required>
+                            <option value="">Select Language</option>
+                            <option value="english">English</option>
+                            <option value="hindi">Hindi</option>
+                            <option value="marathi">Marathi</option>
+
+                        </select>
+                    </div>
+                    <!-- Gender Selection -->
+                    <div class="col-12 col-sm-6 col-sm-3">
+                        <label for="gender">Choose Gender</label>
+                        <select id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <!-- Color Theme Selection -->
+                    <div class="col-12 col-sm-6 col-sm-3">
+                        <label for="colorTheme">Choose Color Theme</label>
+                        <select id="colorTheme" required>
+                            <option value="">Select Color Theme</option>
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+
+                    <!-- Age Selection -->
+                    <!-- <div class="col-12 col-sm-6 col-sm-3">
+                        <label for="age">Enter Age</label>
+                        <input type="number" id="age" required placeholder="Enter Age">
+                    </div> -->
+
+                </div> 
+            </div>
+            <!-- Buttons for navigating form sections -->
+            <div class="buttons">
+                <button type="submit" class="btn-submit" id="submitBtn" style="display: none;">Submit</button>
+            </div>
+        </form>
+    </div>
+<!-- Container for the card -->
+<div id="cardContainer" style="z-index: 99; display: none; background-color: #f1f1f1; border: 1px solid #ddd;margin-top:20px;border-radius:16px;">
+<div id="iframeBlock" style="z-index: 99; display: none; background-color: #f1f1f1; border: 1px solid #ddd; margin-top: 20px;">
+<!-- The card will be injected here after submission --> 
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('cardiologyForm');
+        const sections = document.querySelectorAll('.form-section');
+        const progressBar = document.querySelector('.progress');
+        const submitBtn = document.getElementById('submitBtn');
+        const categoryOptions = document.getElementById('categoryOptions');
+        const subCategoryOptions = document.getElementById('subCategoryOptions');
+        const categorySelect = document.getElementById('categorySelect');
+        const subCategorySelect = document.getElementById('subCategorySelect');
+        // DARK AND LIGHT THEME
+        const btn = document.querySelector(".btn-toggle");
+        const theme = document.querySelector("#theme-link");
+        btn.addEventListener("click", function() {
+            // Swap out the URL for the different stylesheets
+            if (theme.getAttribute("href") == "/dark-theme.css") { theme.href = "/ligth-theme.css";  } else {  theme.href = "/dark-theme.css"; }
+        });
+        const cardContainer = document.getElementById('cardContainer');  // Container for the card
+        let currentSection = 0;
+        let currentCategoryIndex = null; // To keep track of the selected category
+        
+        // Sample data for categories and sub-categories
+        const categories = [
+        { name: 'Birthday', subCategories: [], urlPath: '/birthday' },
+        { name: 'Baby Shower', subCategories: [], urlPath: '/baby-shower' },
+        { name: 'House Warming', subCategories: [], urlPath: '/house-warming' },
+        { name: 'Wedding', subCategories: [
+            'Mehndi', 
+            'Haldi', 
+            'Tilak', 
+            'Sangeet', 
+            'Engagement', 
+            'Reception', 
+            'Marathi', 
+            'South Indian', 
+            'Save the Date', 
+            'Rajasthani', 
+            'Jain', 
+            'Punjabi', 
+            'Bridal Shower', 
+            'Wedding Ceremony'
+        ], urlPath: '/wedding' },
+        { name: 'Greetings', subCategories: [
+            'Birthday Wishes', 
+            'Congratulations', 
+            'Thank You', 
+            'Devotional', 
+            'Anniversary Wishes'
+        ], urlPath: '/greetings' },
+        { name: 'Super Hero Birthday', subCategories: [], urlPath: '/super-hero-birthday' },
+        { name: 'Anniversary Celebration', subCategories: [], urlPath: '/anniversary-celebration' },
+        { name: 'Marathi Wedding', subCategories: [], urlPath: '/marathi-wedding' },
+        { name: 'Hindi Wedding', subCategories: [], urlPath: '/hindi-wedding' },
+        { name: 'Premium Invitations', subCategories: [], urlPath: '/premium-invitations' },
+        { name: 'Inaugration', subCategories: [], urlPath: '/inauguration'}
+    ];
+
+    function populateCategories() {
+        categoryOptions.innerHTML = categories.map((category, index) => {
+            return `<div class="option" data-index="${index}">${category.name}</div>`;
+        }).join('');
+    }
+
+    function populateSubCategories(categoryIndex) {
+        const subCategories = categories[categoryIndex].subCategories;
+        subCategoryOptions.innerHTML = subCategories.map(subCategory => {
+            return `<div class="option">${subCategory}</div>`;
+        }).join('');
+    }
+
+    // Toggle dropdown visibility for categories and sub-categories with smooth transition
+    categorySelect.addEventListener('click', () => {
+        categoryOptions.classList.toggle('active'); // Toggle the 'active' class to trigger transition
+    });
+
+    subCategorySelect.addEventListener('click', () => {
+        subCategoryOptions.classList.toggle('active'); // Toggle the 'active' class to trigger transition
+    });
+
+    // Event listener for category selection
+    categoryOptions.addEventListener('click', (e) => {
+        if (e.target.classList.contains('option')) {
+            const categoryIndex = e.target.getAttribute('data-index');
+            currentCategoryIndex = categoryIndex; // Store selected category index
+            categorySelect.querySelector('span').textContent = categories[categoryIndex].name;
+            populateSubCategories(categoryIndex);
+            subCategorySelect.querySelector('span').textContent = 'Select Sub-Category'; // Reset sub-category text
+            subCategoryOptions.classList.remove('active');
+            if (categories[categoryIndex].subCategories.length === 0) {
+                showSection(2);
+                updateProgress();
+            } else {
+                showSection(1); // Otherwise, show sub-category section
+                updateProgress(); // Update progress after category selection
+            }
+        }
+    });
+
+    // Event listener for sub-category selection
+    subCategoryOptions.addEventListener('click', (e) => {
+        if (e.target.classList.contains('option')) {
+            subCategorySelect.querySelector('span').textContent = e.target.textContent;
+            subCategoryOptions.classList.remove('active');
+            showSection(2); // Show next section after sub-category selection
+            updateProgress(); // Update progress after sub-category selection
+        }
+    }); 
+
+    // Show section based on index
+    function showSection(sectionIndex) {
+        sections.forEach((section, index) => {section.classList.toggle('active', index === sectionIndex);});
+        currentSection = sectionIndex;  // Update currentSection value when switching sections
+        updateButtons();  // Update buttons visibility after showing the new section
+    }
+
+    // Update buttons visibility
+    function updateButtons() { submitBtn.style.display = currentSection === sections.length - 1 ? 'block' : 'none';}
+
+    // Update progress bar
+    function updateProgress() {
+        // Calculate the percentage based on the current section
+        const progress = ((currentSection + 1) / sections.length) * 100;
+        progressBar.style.width = `${progress}%`;
+    }
+
+    // Form submission logic
+    form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const mainContent = document.querySelector('.main');
+    mainContent.style.display = 'none';
+    // Show loader before displaying the card
+    const loader = document.createElement('div');
+    loader.classList.add('spinner');
+    cardContainer.appendChild(loader);
+    cardContainer.style.display = 'block';
+    setTimeout(function() {
+        // Capture the form data
+        const categoryName = categories[currentCategoryIndex].name;
+        const subCategoryName = subCategorySelect.querySelector('span').textContent;
+        // New fields
+        const language = document.getElementById('language').value;
+        const gender = document.getElementById('gender').value;
+        const colorTheme = document.getElementById('colorTheme').value;
+        // const age = document.getElementById('age').value;
+        // URL Encoding for category and sub-category (to handle spaces, special characters)
+        // New fields (product name)
+        const productName = "celebrating-love-our-special-day-invitation-video";  // Assuming you have an input field for product name
+
+        // URL Encoding for category, sub-category, and product name
+        const encodedCategory = encodeURIComponent(categoryName.toLowerCase().replace(/\s+/g, '-'));
+        const encodedSubCategory = subCategoryName && subCategoryName !== 'Select Sub-Category' ? encodeURIComponent(subCategoryName.toLowerCase().replace(/\s+/g, '-')) : '';
+        const encodedProductName = encodeURIComponent(productName.toLowerCase().replace(/\s+/g, '-'));
+
+        // Construct dynamic URL based on whether a sub-category is selected or not
+        let dynamicUrl = `https://invitecrafter.com/${encodedCategory}`;
+        if (encodedSubCategory) {
+            dynamicUrl += `/${encodedSubCategory}`;
+        }
+        if (encodedProductName) {
+            dynamicUrl += `/${encodedProductName}`;
+        }
+        // Add the dynamic form path
+        dynamicUrl += `/dynamicform`;
+        // Create the card content
+        const cardHTML = `
+            <div class="card">
+                <h2>Form Submission Details</h2>
+                <p><strong>Category:</strong> ${categoryName}</p>
+                <p><strong>Sub-Category:</strong> ${subCategoryName}</p>
+                <p><strong>Language:</strong> ${language}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+                <p><strong>Color Theme:</strong> ${colorTheme}</p>
+                <button id="openIframeBtn">create now</button>
+            </div>`;
+        cardContainer.innerHTML = cardHTML;
+        // Add event listener to open the URL in an iframe
+        const openIframeBtn = document.getElementById('openIframeBtn');
+        openIframeBtn.addEventListener('click', function() {
+                // Create the iframe element
+                const iframe = document.createElement('iframe');
+                iframe.src = dynamicUrl;
+                iframe.width ="100%"; 
+                iframe.height ="600px"; 
+                iframe.frameBorder ="0";
+                iframe.style.border ="none";
+                // Append the iframe to the container
+                cardContainer.innerHTML = ''; // Clear previous content (if needed)
+                cardContainer.appendChild(iframe); // Add the iframe to the container
+            });
+            form.reset();
+            }, 3000); 
+        });
+    // Initialize
+    populateCategories();
+    updateButtons();
+    updateProgress();
+});
+
+</script>
+</body>
+</html>

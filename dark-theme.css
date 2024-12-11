@@ -1,0 +1,11 @@
+/* dark-theme.css */
+
+body {
+  color: #eee;
+  background-color: #1f2029;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+}
+
+body a {
+  color: #809fff;
+}
